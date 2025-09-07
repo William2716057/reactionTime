@@ -3,10 +3,14 @@ let message = document.getElementById("message");
 let bestTimeDisplay = document.getElementById("best-time");
 let leaderboard = document.getElementById("leaderboard");
 let toggleThemeBtn = document.getElementById("toggle-theme");
-
 let startTime = null;
 let isRed = false;
 let timeoutId = null;
+
+const shareBtn = document.getElementById("share-btn");
+const sharedTimeDisplay = document.getElementById("shared-time");
+
+
 
 // Best Time Functions
 function getBestTime() {
@@ -112,3 +116,55 @@ window.onload = () => {
     loadTheme();
     startGame();
 };
+
+function createShareLink(bestTime) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("best", bestTime);
+    return url.toString();
+}
+
+shareBtn.addEventListener("click", () => {
+    const best = getBestTime();
+    if (!best) {
+        alert("No best time to share yet!");
+        return;
+    }
+
+    const shareLink = createShareLink(best);
+    navigator.clipboard.writeText(shareLink).then(() => {
+        sharedTimeDisplay.textContent = "Link copied to clipboard!";
+    }).catch(() => {
+        alert("Failed to copy link.");
+    });
+});
+
+// Check for shared best time in URL
+function checkSharedTimeFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const sharedBest = params.get("best");
+    if (sharedBest) {
+        sharedTimeDisplay.textContent = `Shared Best Time: ${sharedBest} seconds`;
+    }
+}
+
+// Run it on load
+window.onload = () => {
+    loadTheme();
+    checkSharedTimeFromURL();
+    startGame();
+};
+
+const resetBtn = document.getElementById("reset-scores");
+
+resetBtn.addEventListener("click", () => {
+    if (confirm("Are you sure you want to reset your best time and leaderboard?")) {
+        localStorage.removeItem("bestTime");
+        localStorage.removeItem("leaderboard");
+        displayBestTime();
+        displayLeaderboard();
+        sharedTimeDisplay.textContent = "Scores reset.";
+        setTimeout(() => {
+            sharedTimeDisplay.textContent = "";
+        }, 3000);
+    }
+});
