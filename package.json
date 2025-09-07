@@ -1,0 +1,14 @@
+{
+  "name": "reaction-test",
+  "version": "0.0.0",
+  "description": "ReactionTest",
+  "main": "server.js",
+  "author": {
+    "name": ""
+  },
+  "devDependencies": {
+    "eslint": "^8.21.0"
+  },
+  "eslintConfig": {
+  }
+}

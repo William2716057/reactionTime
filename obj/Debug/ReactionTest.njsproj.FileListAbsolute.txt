@@ -1,0 +1,3 @@
+C:\Users\wills\Desktop\Shortcuts\Files\Github\ReactionTest\ReactionTest\obj\Debug\ReactionTest.njsproj.AssemblyReference.cache
+C:\Users\wills\Desktop\Shortcuts\Files\Github\ReactionTest\ReactionTest\obj\Debug\ReactionTest.njsproj.CoreCompileInputs.cache
+C:\Users\wills\Desktop\Shortcuts\Files\Github\ReactionTest\ReactionTest\bin\Microsoft.NodejsTools.WebRole.dll
